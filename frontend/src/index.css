@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #05070d;
+  --color-ink-900: #0a0f1c;
+  --color-ink-800: #111827;
+  --color-ink-700: #1b2435;
+  --color-ink-600: #2a3548;
+
+  --color-navy-500: #2563eb;
+  --color-navy-400: #3b82f6;
+  --color-navy-300: #60a5fa;
+
+  --color-saffron-500: #f59e0b;
+  --color-saffron-400: #fbbf24;
+
+  --color-mint-500: #10b981;
+  --color-rose-500: #f43f5e;
+
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+* {
+  border-color: rgb(255 255 255 / 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #05070d;
+  color: rgb(226 232 240);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ink-900); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-600);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-navy-500); }
+
+@utility glass {
+  background: rgb(255 255 255 / 0.04);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+
+@utility glass-strong {
+  background: rgb(255 255 255 / 0.07);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgb(255 255 255 / 0.12);
+}
+
+@utility text-gradient {
+  background: linear-gradient(120deg, #60a5fa 0%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility glow-navy {
+  box-shadow: 0 0 40px -10px rgb(37 99 235 / 0.5);
+}
+
+@keyframes aurora {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  33% { transform: translate(8%, -12%) scale(1.15); opacity: 0.75; }
+  66% { transform: translate(-8%, 8%) scale(0.95); opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.animate-aurora { animation: aurora 18s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+.skeleton {
+  background: linear-gradient(90deg, #111827 0%, #1b2435 50%, #111827 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* ═══════════════════════════════════════════════════
+   LIGHT MODE  –  toggled by adding .light to <html>
+   ═══════════════════════════════════════════════════ */
+
+html.light body {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+/* In light mode the overlay is pale so the image softly shows through */
+html.light .dark-overlay {
+  background-color: rgb(241 245 249 / 0.82) !important;
+}
+
+html.light * {
+  border-color: rgb(0 0 0 / 0.09);
+}
+
+/* Scrollbar */
+html.light ::-webkit-scrollbar-track { background: #e2e8f0; }
+html.light ::-webkit-scrollbar-thumb { background: #94a3b8; }
+
+/* Glass surfaces → white card look */
+html.light .glass {
+  background: rgb(255 255 255 / 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgb(0 0 0 / 0.08);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.06), 0 4px 16px rgb(0 0 0 / 0.04);
+}
+html.light .glass-strong {
+  background: rgb(255 255 255 / 0.95);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgb(0 0 0 / 0.10);
+  box-shadow: 0 4px 24px rgb(0 0 0 / 0.08);
+}
+
+/* Navbar transparent → white */
+html.light header {
+  background: rgb(255 255 255 / 0.92) !important;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.06);
+  backdrop-filter: blur(20px);
+}
+
+/* Override hardcoded dark text utilities */
+html.light .text-white  { color: #0f172a !important; }
+html.light .text-slate-100 { color: #1e293b !important; }
+html.light .text-slate-200 { color: #334155 !important; }
+html.light .text-slate-300 { color: #475569 !important; }
+html.light .text-slate-400 { color: #64748b !important; }
+html.light .text-slate-500 { color: #94a3b8 !important; }
+html.light .text-slate-600 { color: #94a3b8 !important; }
+
+/* Dark backgrounds → light equivalents */
+html.light .bg-ink-950,
+html.light .bg-\[var\(--color-ink-950\)\] { background-color: #f1f5f9 !important; }
+html.light .bg-navy-800 { background-color: #dbeafe !important; }
+html.light .bg-white\/3,
+html.light .bg-white\/4,
+html.light .bg-white\/5,
+html.light .bg-white\/8 { background-color: rgb(15 23 42 / 0.04) !important; }
+html.light .hover\:bg-white\/3:hover,
+html.light .hover\:bg-white\/5:hover,
+html.light .hover\:bg-white\/10:hover { background-color: rgb(15 23 42 / 0.06) !important; }
+
+/* Borders */
+html.light .divide-white\/6 > * + * { border-color: rgb(0 0 0 / 0.07) !important; }
+html.light .border-white\/8,
+html.light .border-white\/10,
+html.light .border-white\/12 { border-color: rgb(0 0 0 / 0.09) !important; }
+
+/* Ghost button */
+html.light .bg-white\/5.text-slate-200 {
+  background: rgb(15 23 42 / 0.06) !important;
+  color: #334155 !important;
+  border-color: rgb(0 0 0 / 0.10) !important;
+}
+
+/* Skeleton */
+html.light .skeleton {
+  background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 50%, #e2e8f0 100%);
+  background-size: 1000px 100%;
+}
+
+/* Overlapping white cards on Dashboard hero — no change needed (already white) */
+
+/* Aurora bg blobs — lighter in light mode */
+html.light .animate-aurora { opacity: 0.15 !important; }
+
+/* Hero gradient overlay — lighter */
+html.light .bg-gradient-to-b { opacity: 0.75; }
+
+/* Theme toggle button animation */
+.theme-toggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border: none;
+  outline: none;
+  flex-shrink: 0;
+}
+.theme-toggle.dark  { background: #1e3a5f; }
+.theme-toggle.light { background: #fbbf24; }
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: left 0.3s ease, background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  line-height: 1;
+}
+.theme-toggle.dark  .theme-toggle-knob { left: 3px;  background: #60a5fa; }
+.theme-toggle.light .theme-toggle-knob { left: 27px; background: #fff; }
+

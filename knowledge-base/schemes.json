@@ -1,0 +1,244 @@
+[
+  {
+    "schemeId": "TN-IGNOAPS",
+    "schemeName": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS)",
+    "department": "Social Welfare",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": 60,
+      "maxIncome": 120000,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": false,
+      "occupations": []
+    },
+    "sections": [
+      {
+        "section": "eligibility",
+        "content": "IGNOAPS provides a monthly pension to citizens aged 60 years and above who belong to a Below Poverty Line household. The applicant must be a resident of Tamil Nadu, must not be receiving any other state or central pension, and the household annual income must not exceed Rs. 1,20,000. Applicants aged 60 to 79 receive Rs. 1,200 per month and applicants aged 80 and above receive Rs. 1,500 per month."
+      },
+      {
+        "section": "documents",
+        "content": "Documents required for IGNOAPS: Aadhaar card, age proof such as a birth certificate or school transfer certificate, income certificate issued by the Tahsildar within the last six months, BPL ration card, recent passport-size photograph, and a bank passbook copy for direct benefit transfer."
+      },
+      {
+        "section": "process",
+        "content": "Applications for IGNOAPS are submitted at the Taluk office or through an e-Sevai centre. The Revenue Inspector conducts verification within 30 days. Approved pensions are credited to the applicant's bank account by the 10th of each month. Applicants can check status using their application number at any e-Sevai centre."
+      }
+    ]
+  },
+  {
+    "schemeId": "PM-KISAN",
+    "schemeName": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "department": "Agriculture",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": 18,
+      "maxIncome": null,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": true,
+      "occupations": ["farmer", "agriculture"]
+    },
+    "sections": [
+      {
+        "section": "eligibility",
+        "content": "PM-KISAN provides Rs. 6,000 per year to landholding farmer families, paid in three equal instalments of Rs. 2,000 every four months. The family must own cultivable land recorded in their name in the land records. There is no minimum land requirement. Income tax payers, serving or retired government employees earning a monthly pension above Rs. 10,000, and professionals such as doctors and lawyers are excluded."
+      },
+      {
+        "section": "documents",
+        "content": "Documents required for PM-KISAN: Aadhaar card mandatory, land ownership records such as patta or chitta, bank account details linked to Aadhaar, and a self-declaration of citizenship. Aadhaar seeding of the bank account is compulsory for payment."
+      },
+      {
+        "section": "process",
+        "content": "Farmers can register for PM-KISAN at the Village Administrative Officer's office, through a Common Service Centre, or on the PM-KISAN portal. Land records are verified by the state revenue department. Instalments are released in April to July, August to November, and December to March. Beneficiaries must complete e-KYC to continue receiving payments."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-KALAIGNAR-MAGALIR",
+    "schemeName": "Kalaignar Magalir Urimai Thogai",
+    "department": "Social Welfare",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": 21,
+      "maxIncome": 250000,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": false,
+      "occupations": []
+    },
+    "sections": [
+      {
+        "section": "eligibility",
+        "content": "Kalaignar Magalir Urimai Thogai provides Rs. 1,000 per month to eligible women who are heads of their household in Tamil Nadu. The applicant must be at least 21 years of age. Households where the annual income exceeds Rs. 2,50,000, where any member is an income tax payer, where the family owns more than five acres of wet land or ten acres of dry land, or where a member owns a four-wheeler other than a taxi or tractor, are not eligible."
+      },
+      {
+        "section": "documents",
+        "content": "Documents required: Aadhaar card, family ration card, bank passbook in the applicant's name, and proof of residence in Tamil Nadu. The bank account must be in the woman applicant's own name and linked to Aadhaar."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-FARMER-CROP-INSURANCE",
+    "schemeName": "Pradhan Mantri Fasal Bima Yojana (Crop Insurance)",
+    "department": "Agriculture",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": 18,
+      "maxIncome": null,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": true,
+      "occupations": ["farmer", "agriculture"]
+    },
+    "sections": [
+      {
+        "section": "eligibility",
+        "content": "Pradhan Mantri Fasal Bima Yojana covers all farmers growing notified crops in notified areas, including sharecroppers and tenant farmers. Enrolment is voluntary. Farmers pay a premium of 2 percent of the sum insured for Kharif food and oilseed crops, 1.5 percent for Rabi crops, and 5 percent for commercial and horticultural crops. The remaining premium is shared by the central and state governments."
+      },
+      {
+        "section": "claims",
+        "content": "Claims under the crop insurance scheme are paid for prevented sowing, standing crop loss due to drought, flood, pest or disease, post-harvest losses within 14 days of harvest, and localised calamities such as hailstorm and landslide. Farmers must report crop loss within 72 hours through the Crop Insurance app, the insurance company toll-free number, or the local agriculture officer."
+      },
+      {
+        "section": "documents",
+        "content": "Documents required for crop insurance: land records such as patta or chitta, sowing certificate from the Village Administrative Officer, Aadhaar card, bank passbook, and for tenant farmers a valid lease agreement."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-INCOME-CERTIFICATE",
+    "schemeName": "Income Certificate",
+    "department": "Revenue",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": null,
+      "maxIncome": null,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": false,
+      "occupations": []
+    },
+    "sections": [
+      {
+        "section": "process",
+        "content": "An income certificate is issued by the Tahsildar and is valid for one year from the date of issue. Applications are made through the e-Sevai portal or at any e-Sevai centre. The prescribed service charge is Rs. 60. The certificate is normally issued within 15 working days after verification by the Village Administrative Officer and the Revenue Inspector."
+      },
+      {
+        "section": "documents",
+        "content": "Documents required for an income certificate: Aadhaar card, ration card, address proof, salary certificate from the employer for salaried applicants, and for farmers the land records along with a statement of agricultural income. A self-declaration of total family income must also be submitted."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-COMMUNITY-CERTIFICATE",
+    "schemeName": "Community Certificate",
+    "department": "Revenue",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": null,
+      "maxIncome": null,
+      "categories": ["obc", "sc", "st"],
+      "ruralOnly": false,
+      "occupations": []
+    },
+    "sections": [
+      {
+        "section": "process",
+        "content": "A community certificate certifies the caste or community of the applicant and is issued permanently, without an expiry date. It is issued by the Tahsildar for Scheduled Caste, Scheduled Tribe and Other Backward Class applicants. Applications are made at an e-Sevai centre with a service charge of Rs. 60. Processing normally takes 30 days including field verification."
+      },
+      {
+        "section": "documents",
+        "content": "Documents required for a community certificate: Aadhaar card, ration card, birth certificate, the community certificate of the father or a blood relative, school transfer certificate showing community, and proof of residence."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-CMCHIS",
+    "schemeName": "Chief Minister's Comprehensive Health Insurance Scheme",
+    "department": "Health and Family Welfare",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": null,
+      "maxIncome": 120000,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": false,
+      "occupations": []
+    },
+    "sections": [
+      {
+        "section": "eligibility",
+        "content": "The Chief Minister's Comprehensive Health Insurance Scheme covers families in Tamil Nadu with an annual income of Rs. 1,20,000 or less. The scheme provides coverage up to Rs. 5 lakh per family per year for listed procedures, with an additional corpus for specified high-cost treatments. All family members listed on the ration card are covered, including newborns."
+      },
+      {
+        "section": "coverage",
+        "content": "The health insurance scheme covers over 1,000 medical and surgical procedures and 8 follow-up packages at empanelled government and private hospitals. Treatment is cashless. Coverage includes cardiac surgery, cancer treatment, neurosurgery, dialysis, and organ transplant. Pre-existing conditions are covered from day one."
+      },
+      {
+        "section": "process",
+        "content": "Enrolment in the health insurance scheme is done at the village or ward level through camps, or at any e-Sevai centre. Families receive a smart card. At the hospital the patient presents the smart card and Aadhaar at the insurance help desk for pre-authorisation."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-FREE-BUS-PASS",
+    "schemeName": "Free Bus Travel for Women",
+    "department": "Transport",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": null,
+      "maxIncome": null,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": false,
+      "occupations": []
+    },
+    "sections": [
+      {
+        "section": "eligibility",
+        "content": "Women residents of Tamil Nadu travel free of charge on ordinary town buses and city buses operated by state transport corporations. No pass, card or prior registration is required. The concession does not apply to express, deluxe, air-conditioned or long-distance services, on which the normal fare is charged."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-PATTA-TRANSFER",
+    "schemeName": "Patta Transfer and Land Records",
+    "department": "Revenue",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": null,
+      "maxIncome": null,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": false,
+      "occupations": ["farmer", "agriculture"]
+    },
+    "sections": [
+      {
+        "section": "process",
+        "content": "Patta transfer records a change of land ownership in the revenue records. Applications are submitted through the e-Sevai portal or at a Taluk office. The prescribed fee is Rs. 60 for the application plus Rs. 100 for the transfer. The Village Administrative Officer verifies possession and the Tahsildar approves the transfer. The process normally takes 30 to 45 days."
+      },
+      {
+        "section": "documents",
+        "content": "Documents required for patta transfer: registered sale deed or gift deed or partition deed, the existing patta, encumbrance certificate for the last 15 years, up-to-date land tax receipt, Aadhaar card of the applicant, and a death certificate with legal heir certificate in cases of inheritance."
+      }
+    ]
+  },
+  {
+    "schemeId": "TN-FARM-MECHANISATION",
+    "schemeName": "Agricultural Mechanisation Subsidy",
+    "department": "Agriculture",
+    "metadata": {
+      "state": "Tamil Nadu",
+      "minAge": 18,
+      "maxIncome": null,
+      "categories": ["general", "obc", "sc", "st", "ews"],
+      "ruralOnly": true,
+      "occupations": ["farmer", "agriculture"]
+    },
+    "sections": [
+      {
+        "section": "eligibility",
+        "content": "The Agricultural Mechanisation subsidy assists farmers in purchasing farm machinery including power tillers, rotavators, seed drills, sprayers and harvesting equipment. Small and marginal farmers, women farmers, and farmers belonging to Scheduled Castes and Scheduled Tribes receive a subsidy of 50 percent of the machine cost. Other farmers receive 40 percent. The farmer must own cultivable land and must not have claimed a subsidy for the same machine in the previous five years."
+      },
+      {
+        "section": "process",
+        "content": "Applications for the mechanisation subsidy are submitted to the Assistant Director of Agriculture in the block office or online through the state agriculture department portal. Selection is on a first-come first-served basis subject to annual targets. The farmer purchases the machine from an approved dealer and the subsidy is credited to the bank account after field verification."
+      }
+    ]
+  }
+]
