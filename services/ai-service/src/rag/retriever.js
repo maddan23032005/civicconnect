@@ -3,9 +3,14 @@ import { KnowledgeChunk } from "../models/KnowledgeChunk.js";
 
 export function createRetriever(embedder, log) {
   return {
-    /** Semantic search over Atlas Vector Search. */
+    /** Semantic search over Atlas Vector Search. Returns [] when embedding is unavailable. */
     async search(question, { topK = env.ai.topK, state = null, department = null } = {}) {
+      // embedQuery returns null when the Gemini key is invalid — skip vector search entirely
       const queryVector = await embedder.embedQuery(question);
+      if (!queryVector) {
+        log.warn("Skipping vector search (embedding unavailable), falling back to keyword search");
+        return [];
+      }
 
       const filter = {};
       if (state) filter["metadata.state"] = state;

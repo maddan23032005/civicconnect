@@ -95,6 +95,7 @@ export function createDocumentAgent({ log }) {
 
       let data;
       let usedModel = null;
+      let authError = false;
 
       outer:
       for (const model of MODELS) {
@@ -110,6 +111,18 @@ export function createDocumentAgent({ log }) {
           } catch (err) {
             const status = err.response?.status;
             const detail = err.response?.data?.error?.message || err.message;
+
+            // 401/403 = bad API key — no point retrying any model
+            if (status === 401 || status === 403) {
+              log.error(
+                { status, detail },
+                "Gemini API key unauthorised — document verification unavailable. " +
+                "Fix GEMINI_API_KEY in .env to enable AI document verification."
+              );
+              authError = true;
+              break outer;
+            }
+
             const retryable = status === 503 || status === 429 || status === 500;
 
             if (!retryable) {
@@ -124,8 +137,34 @@ export function createDocumentAgent({ log }) {
         log.warn({ model }, "Model exhausted, trying next");
       }
 
-      if (!data) {
-        throw new Error("All Gemini vision models are currently at capacity");
+      // Gemini key is invalid — return a safe manual_review result so upload still succeeds
+      if (authError || !data) {
+        const fallback = {
+          readable: null,
+          documentTypeMatches: null,
+          extracted: {},
+          matches: [],
+          mismatches: [],
+          confidence: 0,
+          summary: "Automated verification is currently unavailable. An officer will review this document manually.",
+          recommendation: "manual_review",
+          _skipped: true,
+        };
+
+        await AiAuditLog.create({
+          feature: "verify",
+          provider: "gemini",
+          model: null,
+          latencyMs: Date.now() - started,
+          inputRedacted: `document type: ${documentType}`,
+          outputSummary: authError
+            ? "skipped — API key invalid (401)"
+            : "skipped — all models at capacity",
+          grounded: false,
+        });
+
+        log.warn({ documentType }, "Document verification skipped — returning manual_review fallback");
+        return fallback;
       }
 
       const candidate = data?.candidates?.[0];

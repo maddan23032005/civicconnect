@@ -19,28 +19,36 @@ const QUICK_ACTIONS = [
 
 const SERVICES_SPOTLIGHT = [
   {
-    emoji: "📄",
+    icon: FileText,
     title: "Digital Document Locker",
     desc: "Upload Aadhaar, PAN, land records once. AI automatically verifies authenticity and pre-fills all future applications.",
     link: "/documents",
+    tone: "text-mint-400",
+    bg: "bg-mint-500/15"
   },
   {
-    emoji: "📢",
+    icon: MessageSquareWarning,
     title: "Smart Grievance Filing",
     desc: "Your complaint is auto-classified by severity, routed to the correct department, and SLA-tracked to resolution.",
     link: "/grievances/new",
+    tone: "text-rose-400",
+    bg: "bg-rose-500/15"
   },
   {
-    emoji: "💳",
+    icon: CreditCard,
     title: "Secure Online Payments",
     desc: "Pay fees for income certificates, land tax, trade licences and more via Razorpay. Download receipts instantly.",
     link: "/payments",
+    tone: "text-navy-300",
+    bg: "bg-navy-500/20"
   },
   {
-    emoji: "🤖",
+    icon: Sparkles,
     title: "AI Scheme Advisor",
     desc: "Ask Sahayak which government schemes you qualify for. Answers are grounded in official documents, with citations.",
     link: "/dashboard",
+    tone: "text-saffron-400",
+    bg: "bg-saffron-500/15"
   },
 ];
 
@@ -123,20 +131,20 @@ export default function Dashboard() {
             {SERVICES_SPOTLIGHT.map((card) => (
               <StaggerItem key={card.title}>
                 <Link to={card.link}>
-                  <div className="group flex h-full flex-col bg-white p-7 shadow-2xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-saffron-500/20">
-                    <div className="mb-5 inline-flex h-12 w-12 items-center justify-center bg-[#f4ebd9] text-2xl">
-                      {card.emoji}
+                  <Card hover className="group flex h-full flex-col p-7">
+                    <div className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl ${card.bg}`}>
+                      <card.icon size={24} className={card.tone} />
                     </div>
-                    <h3 className="mb-3 font-display text-base font-bold text-slate-800 group-hover:text-navy-500 transition-colors">
+                    <h3 className="mb-3 font-display text-base font-bold text-white group-hover:text-saffron-400 transition-colors">
                       {card.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-slate-500">
+                    <p className="text-sm leading-relaxed text-slate-400">
                       {card.desc}
                     </p>
-                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-navy-500 opacity-0 transition-opacity group-hover:opacity-100">
+                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-saffron-400 opacity-0 transition-opacity group-hover:opacity-100">
                       Go <ArrowRight size={12} />
                     </div>
-                  </div>
+                  </Card>
                 </Link>
               </StaggerItem>
             ))}

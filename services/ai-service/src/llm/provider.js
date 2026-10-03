@@ -63,26 +63,41 @@ async function callGroq({ system, user, json = false, temperature = 0.2 }) {
 }
 
 export function createLlm(log) {
+  // A valid Google AI Studio key always starts with "AIza".
+  // If the key is missing or has the wrong format, skip Gemini entirely
+  // and route all calls straight to Groq — avoiding a 401 on every request.
+  const geminiKeyValid = env.ai.geminiKey && env.ai.geminiKey.startsWith("AIza");
+
+  if (!geminiKeyValid) {
+    log.warn(
+      "GEMINI_API_KEY is missing or invalid (must start with 'AIza'). " +
+      "All LLM calls will use Groq. Update GEMINI_API_KEY in .env to enable Gemini."
+    );
+  }
+
   return {
-    /** Tries Gemini, falls back to Groq. Throws only if both fail. */
+    /** Tries Gemini first (if key is valid), falls back to Groq. Throws only if both fail. */
     async complete(opts) {
       const started = Date.now();
-      try {
-        const result = await callGemini(opts);
-        log.debug({ provider: "gemini", ms: Date.now() - started }, "LLM call ok");
-        return { ...result, latencyMs: Date.now() - started };
-      } catch (err) {
-        const status = err.response?.status;
-        log.warn({ err: err.message, status }, "Gemini failed, falling back to Groq");
 
+      if (geminiKeyValid) {
         try {
-          const result = await callGroq(opts);
-          log.info({ provider: "groq", ms: Date.now() - started }, "LLM fallback succeeded");
-          return { ...result, latencyMs: Date.now() - started, fellBack: true };
-        } catch (err2) {
-          log.error({ err: err2.message }, "Both LLM providers failed");
-          throw new Error("AI providers are unavailable");
+          const result = await callGemini(opts);
+          log.debug({ provider: "gemini", ms: Date.now() - started }, "LLM call ok");
+          return { ...result, latencyMs: Date.now() - started };
+        } catch (err) {
+          const status = err.response?.status;
+          log.warn({ err: err.message, status }, "Gemini failed, falling back to Groq");
         }
+      }
+
+      try {
+        const result = await callGroq(opts);
+        log.info({ provider: "groq", ms: Date.now() - started }, "LLM call ok (Groq)");
+        return { ...result, latencyMs: Date.now() - started, fellBack: !geminiKeyValid };
+      } catch (err2) {
+        log.error({ err: err2.message }, "Groq LLM call failed");
+        throw new Error("AI providers are unavailable");
       }
     },
 

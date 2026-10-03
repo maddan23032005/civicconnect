@@ -69,54 +69,58 @@ app.get("/api/system/health", asyncHandler(async (_req, res) => {
 }));
 
 /* ---------- proxy to microservices ---------- */
-for (const route of routes) {
-  app.use(
-    route.prefix,
-    createProxyMiddleware({
-      target: route.target,
-      changeOrigin: true,
-      pathRewrite: (path) => route.prefix + path,
-      timeout: 20000,
-      proxyTimeout: 20000,
-      on: {
-        proxyReq: (proxyReq, req) => {
-          proxyReq.setHeader("x-request-id", req.id || "");
-          proxyReq.setHeader("x-gateway-instance", String(PORT));
-          if (req.user) {
-            proxyReq.setHeader("x-user-id", req.user.sub || "");
-            proxyReq.setHeader("x-user-role", req.user.role || "");
-          }
+function makeProxy(route, timeoutMs = 20000) {
+  return createProxyMiddleware({
+    target: route.target,
+    changeOrigin: true,
+    pathRewrite: (path) => route.prefix + path,
+    timeout: timeoutMs,
+    proxyTimeout: timeoutMs,
+    on: {
+      proxyReq: (proxyReq, req) => {
+        proxyReq.setHeader("x-request-id", req.id || "");
+        proxyReq.setHeader("x-gateway-instance", String(PORT));
+        if (req.user) {
+          proxyReq.setHeader("x-user-id", req.user.sub || "");
+          proxyReq.setHeader("x-user-role", req.user.role || "");
+        }
 
-          // express.json() already consumed the stream — replay it downstream.
-          // Multipart bodies are never parsed by express.json(), so they stream
-          // through untouched and must not be rewritten here.
-          const isMultipart = (req.headers["content-type"] || "").includes("multipart/form-data");
+        // express.json() already consumed the stream — replay it downstream.
+        // Multipart bodies are never parsed by express.json(), so they stream
+        // through untouched and must not be rewritten here.
+        const isMultipart = (req.headers["content-type"] || "").includes("multipart/form-data");
 
-          if (!isMultipart && req.body && Object.keys(req.body).length > 0) {
-            const bodyData = JSON.stringify(req.body);
-            proxyReq.setHeader("Content-Type", "application/json");
-            proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
-            proxyReq.write(bodyData);
-            proxyReq.end();
-          }
-        },
-        error: (err, req, res) => {
-          log.error({ service: route.service, err: err.message }, "Upstream unreachable");
-          if (!res.headersSent) {
-            res.writeHead(503, { "Content-Type": "application/json" });
-          }
-          res.end(JSON.stringify({
-            success: false,
-            error: {
-              code: "SERVICE_UNAVAILABLE",
-              message: `${route.service} is temporarily unavailable. Other services are unaffected.`,
-            },
-            requestId: req.id,
-          }));
-        },
+        if (!isMultipart && req.body && Object.keys(req.body).length > 0) {
+          const bodyData = JSON.stringify(req.body);
+          proxyReq.setHeader("Content-Type", "application/json");
+          proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+          proxyReq.write(bodyData);
+          proxyReq.end();
+        }
       },
-    })
-  );
+      error: (err, req, res) => {
+        log.error({ service: route.service, err: err.message }, "Upstream unreachable");
+        if (!res.headersSent) {
+          res.writeHead(503, { "Content-Type": "application/json" });
+        }
+        res.end(JSON.stringify({
+          success: false,
+          error: {
+            code: "SERVICE_UNAVAILABLE",
+            message: `${route.service} is temporarily unavailable. Other services are unaffected.`,
+          },
+          requestId: req.id,
+        }));
+      },
+    },
+  });
+}
+
+for (const route of routes) {
+  // AI service calls external LLMs (Groq/Gemini) which can take 25-45s —
+  // give it a longer timeout so the gateway doesn't abort before the response arrives.
+  const timeoutMs = route.service === "ai-service" ? 60000 : 20000;
+  app.use(route.prefix, makeProxy(route, timeoutMs));
 }
 
 listen(PORT, () => {
